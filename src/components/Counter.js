@@ -19,7 +19,7 @@ class Counter extends Component {
   }
 
   render() {
-    const { value, onIncrement, onDecrement } = this.props
+    const { value, onIncrement, onDecrement } = this.props;
     return (
       <p>
         Clicked: {value} times
@@ -48,6 +48,6 @@ Counter.propTypes = {
   value: PropTypes.number.isRequired,
   onIncrement: PropTypes.func.isRequired,
   onDecrement: PropTypes.func.isRequired
-}
+};
 
 export default Counter
