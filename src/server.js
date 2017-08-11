@@ -17,8 +17,11 @@ app.use(handleRender)
 import { renderToString } from 'react-dom/server'
 
 function handleRender(req, res) {
+  // set initial state
+  const state = Math.floor(Math.random() * 100)
+
   // Create a new Redux store instance
-  const store = createStore(counterApp)
+  const store = createStore(counterApp, state)
 
   // Render the component to a string
   const html = renderToString(
