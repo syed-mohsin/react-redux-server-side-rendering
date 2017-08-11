@@ -17,24 +17,26 @@ app.use(handleRender)
 import { renderToString } from 'react-dom/server'
 
 function handleRender(req, res) {
-  // set initial state
-  const state = Math.floor(Math.random() * 100)
+  setTimeout(() => {
+    // set initial state
+    const state = parseInt(req.query.counter) || Math.floor(Math.random() * 100)
 
-  // Create a new Redux store instance
-  const store = createStore(counterApp, state)
+    // Create a new Redux store instance
+    const store = createStore(counterApp, state)
 
-  // Render the component to a string
-  const html = renderToString(
-    <Provider store={store}>
-      <App />
-    </Provider>
-  )
+    // Render the component to a string
+    const html = renderToString(
+      <Provider store={store}>
+        <App />
+      </Provider>
+    )
 
-  // Grab the initial state from our Redux store
-  const preloadedState = store.getState()
+    // Grab the initial state from our Redux store
+    const preloadedState = store.getState()
 
-  // Send the rendered page back to the client
-  res.send(renderFullPage(html, preloadedState))
+    // Send the rendered page back to the client
+    res.send(renderFullPage(html, preloadedState))
+  }, 500)
 }
 
 function renderFullPage(html, preloadedState) {
